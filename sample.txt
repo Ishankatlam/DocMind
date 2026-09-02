@@ -1,0 +1,1 @@
+This is a test document for DocMind. It explains the benefits of AI-powered document search and retrieval. The system should split this text into chunks and store embeddings in PostgreSQL pgvector.

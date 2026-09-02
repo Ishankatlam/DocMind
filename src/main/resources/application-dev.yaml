@@ -1,0 +1,91 @@
+# ==========================================
+# DATABASE CONFIGURATION
+# ==========================================
+
+spring:
+  datasource:
+    url: jdbc:postgresql://${DB_HOST:localhost}:${DB_PORT:5434}/${DB_NAME:dockmind}
+    username: ${DB_USER:postgres}
+    password: ${DB_PASSWORD:postgres}
+
+  # ==========================================
+  # JPA / HIBERNATE
+  # ==========================================
+
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+
+  # ==========================================
+  # SPRING AI / GEMINI
+  # ==========================================
+
+  main:
+    allow-bean-definition-overriding: true
+
+  ai:
+    google:
+      genai:
+        api-key: ${GEMINI_API_KEY:}
+        project-id: ${GOOGLE_CLOUD_PROJECT_ID:}
+        location: ${GOOGLE_CLOUD_LOCATION:us-central1}
+        chat:
+          api-key: ${GEMINI_API_KEY:}
+          options:
+            model: ${GOOGLE_CHAT_MODEL:gemini-3.6-flash}
+        embedding:
+          api-key: ${GEMINI_API_KEY:}
+          project-id: ${GOOGLE_CLOUD_PROJECT_ID:}
+          location: ${GOOGLE_CLOUD_LOCATION:us-central1}
+          text:
+            model: ${GOOGLE_EMBEDDING_MODEL:gemini-embedding-001}
+
+    # ========================================
+    # PGVECTOR
+    # ========================================
+
+    vectorstore:
+      pgvector:
+        index-type: NONE
+        distance-type: COSINE_DISTANCE
+        dimensions: 3072
+        table-name: vector_store
+        schema-name: public
+        initialize-schema: true
+
+  # ==========================================
+  # FILE UPLOAD CONFIGURATION
+  # ==========================================
+
+  servlet:
+    multipart:
+      max-file-size: 25MB
+      max-request-size: 50MB
+# ==========================================
+# APPLICATION CONFIGURATION
+# ==========================================
+
+app:
+
+  # ========================================
+  # RAG CONFIGURATION
+  # ========================================
+
+  rag:
+    chunk-size: 600
+    chunk-overlap: 100
+    top-k: 5
+    similarity-threshold: 0.0
+
+  # ========================================
+  # CORS CONFIGURATION
+  # ========================================
+
+  cors:
+    allowed-origins: "*"
+    allowed-methods: GET,POST,PUT,DELETE,OPTIONS
+    allowed-headers: "*"

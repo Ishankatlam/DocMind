@@ -1,0 +1,7 @@
+spring:
+  profiles:
+    active: dev
+  application:
+    name: DocMind-backend
+server:
+  port: 8083
