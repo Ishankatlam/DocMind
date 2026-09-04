@@ -111,6 +111,13 @@
 			<version>${spring-ai.version}</version>
 		</dependency>
 
+<!--		Model mapper dependency -->
+		<dependency>
+			<groupId>org.modelmapper</groupId>
+			<artifactId>modelmapper</artifactId>
+			<version>2.4.4</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.springframework.ai</groupId>
 			<artifactId>spring-ai-pdf-document-reader</artifactId>

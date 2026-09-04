@@ -2,6 +2,8 @@ package Ishanknjr.example.DocMind.Exceptions;
 
 
 import Ishanknjr.example.DocMind.DTO.ApiResponse;
+import Ishanknjr.example.DocMind.Repository.DocumentMetaDataRepo;
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.http.HttpStatus;
@@ -17,6 +19,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @RestControllerAdvice
+
 public class GlobalExceptionhandler {
     private static final Logger logger = LoggerFactory.getLogger(GlobalExceptionhandler.class);
 
