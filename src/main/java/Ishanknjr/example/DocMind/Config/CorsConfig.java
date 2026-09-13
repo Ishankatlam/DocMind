@@ -13,8 +13,8 @@ public class CorsConfig implements WebMvcConfigurer {
     @Override
     public void addCorsMappings(CorsRegistry registry) {
         String[] allowedOrigins = appProperties.getCors().getAllowedOrigins().split(",");
-       String[] allowedMethods =  appProperties.getCors().getAllowedMethods().split(" ,");
-       String[] allowdheaders = appProperties.getCors().getAllowedHeaders().split(" ,");
+       String[] allowedMethods =  appProperties.getCors().getAllowedMethods().split(",");
+       String[] allowdheaders = appProperties.getCors().getAllowedHeaders().split(",");
 
         registry.addMapping("/api/**")
                 .allowedOrigins(allowedOrigins)

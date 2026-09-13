@@ -48,22 +48,35 @@ public class DocumentMetaDataService {
                 .build();
 
         //      bug   save the document metadata
+        documentMetaData = documentMetaDataRepo.save(documentMetaData);
         System.out.println(documentMetaData.toString());
 
-       int chunksCreated =0;
+        int chunksCreated =0;
 
         try{
           List<Document> parsedDocs = parserService.parse(file);
           chunksCreated = ingestionService.ingest(documentMetaData , parsedDocs);
+
+            documentMetaData.setTotalChunks(chunksCreated);
+            documentMetaData.setStatus(DocumentStatus.INDEXED);
+            documentMetaData = documentMetaDataRepo.save(documentMetaData);
+
         }catch(DocumentProcessingExceptions e){
-            log.info("DocumentMetaData deleting: processing due to fail processing" + e.getMessage());
-            documentMetaDataRepo.delete(documentMetaData);
+//            log.info("DocumentMetaData deleting: processing due to fail processing" + e.getMessage());
+//            documentMetaDataRepo.delete(documentMetaData);
+//            throw e;
+
+            log.error( "Document processing failed: {}", e.getMessage() );
+            documentMetaData.setStatus(DocumentStatus.FAILED);
+
+            documentMetaData.setErrorMessage(e.getMessage());
+            documentMetaDataRepo.save(documentMetaData);
             throw e;
         }
 
-
-        documentMetaData =
-                documentMetaDataRepo.save(documentMetaData);
+//
+//        documentMetaData =
+//                documentMetaDataRepo.save(documentMetaData);
 
 
 // note parse the file list fo document
